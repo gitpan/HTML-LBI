@@ -1,20 +1,36 @@
-# Before `make install' is performed this script should be runnable with
-# `make test'. After `make install' it should work as `perl test.pl'
+#!/usr/bin/perl  
+#############################################################
+#  HTML::LBI
+#  Whyte.Wolf DreamWeaver Library Module
+#  Copyright (c) 2002 by S.D. Campbell <whytwolf@spots.ab.ca>
+#
+#  Last modified 06/03/2002
+#
+#  Test scripts to test that the HTML::DWT module has been
+#  installed correctly.  See Test::More for more information.
+#
+#############################################################
 
-######################### We start with some black magic to print on failure.
+use Carp;
+use Test::More tests => 5;
 
-# Change 1..1 below to 1..last_test_to_print .
-# (It may become useful if the test is moved to ./t subdirectory.)
+#  Check to see if we can use and/or require the module
 
-BEGIN { $| = 1; print "1..1\n"; }
-END {print "not ok 1\n" unless $loaded;}
-use HTML::LBI;
-$loaded = 1;
-print "ok 1\n";
+BEGIN { 
+	use_ok('HTML::LBI');
+	}
+	
+require_ok('HTML::LBI');
 
-######################### End of black magic.
+#  Create a new HTML::LBI object and test to see if it's a 
+#  properly blessed reference.  Die if the file isn't found.
 
-# Insert your test code below (better if it prints "ok 13"
-# (correspondingly "not ok 13") depending on the success of chunk 13
-# of the test code):
+my $l = new HTML::LBI(filename => 'tmp/left.lbi') or die $HTML::DWT::errmsg;
+is(defined($l), 1, 'PASSED: filename => absolute path');
 
+my $l2 = new HTML::LBI(filename => 'left.lbi',
+			path => './') or die $HTML::DWT::errmsg;
+is(defined($l2), 1, 'PASSED: filename => relative path');
+
+my $l3 = new HTML::LBI('tmp/left.lbi') or die $HTML::DWT::errmsg;
+is(defined($l3), 1, 'PASSED: constructor w/ path');

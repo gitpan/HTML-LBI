@@ -4,5 +4,11 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     'NAME'		=> 'HTML::LBI',
     'VERSION_FROM'	=> 'LBI.pm', # finds $VERSION
-    'PREREQ_PM'		=> {}, # e.g., Module::Name => 1.1
+    'PREREQ_PM'		=> {
+    			    Carp => 0.0,
+    			    Test::More => 0.18,
+			    File::Find => 0.00,
+			    File::Basename => 0.00,
+			    }, 
+    'AUTHOR'		=> 'Sean Campbell <whytwolf@spots.ab.ca>',
 );

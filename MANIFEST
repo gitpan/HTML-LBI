@@ -1,7 +1,8 @@
 Changes
-LBI.pm
-MANIFEST
-Makefile.PL
-test.pl
 COPYING
+LBI.pm
+Makefile.PL
+MANIFEST
 README
+test.pl
+tmp/left.lbi
